@@ -1,33 +1,23 @@
 import os
-import sys
 
 
-
-def remove_hidden(path):
-    stripped_files = []
+# inspect directory, for each file: strip out temp files and get size
+def get_dir(path):
+    directory_files = []
     for file in os.listdir(path):
         if not file.startswith('.') and not file.startswith('~'):
+            # appends dir path to filename
             file_size = get_file_stats(path+'/'+file)
+
+            # build dict for file and add to list
             file_data = {'fName': file, 'fSize': file_size}
-            stripped_files.append(file_data)
+            directory_files.append(file_data)
 
+        directory_files_sorted_keys = sorted(directory_files, key=lambda k: k['fSize'], reverse = True)
+        directory_files = directory_files_sorted_keys
+    return directory_files
 
-    return stripped_files
-
+# show results
 def get_file_stats(file):
      size = os.path.getsize(file)
      return size
-
-
-path = '/Users/kenroberts/Downloads'
-
-directory = os.listdir(path)
-files = remove_hidden(path)
-
-
-
-#filestats = os.stat(path)
-#file_size = filestats.st_size
-
-for file in files:
-    print(str(file['fName']) + " " + str(file['fSize']))
