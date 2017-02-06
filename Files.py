@@ -14,6 +14,7 @@ def get_dir(path):
 
     for i in found_dirs:
         dir = os.listdir(path+'/'+i)
+
         for file in dir:
             if not file.startswith('.') and not file.startswith('~'):
                 # appends dir path to filename
