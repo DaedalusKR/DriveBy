@@ -9,12 +9,17 @@ def get_dir(path):
         for dir in dirs:
             found_dirs.append(dir)
 
+    print(found_dirs)
     drive = []
     directory_files = []
     dir_counter = 0
 
     for i in found_dirs:
-        dir = os.listdir(path+'/'+i)
+
+        if dir_counter == 0:
+            dir = os.listdir(path)
+        else:
+            dir = os.listdir(path+'/'+i)
 
         for file in dir:
             if not file.startswith('.') and not file.startswith('~'):

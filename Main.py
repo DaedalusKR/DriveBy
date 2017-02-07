@@ -5,12 +5,17 @@ found_dirs = get_dir(path_selected)
 
 
 num_dirs = len(found_dirs)
+first_pass = 0
 
 for dir_count in range(num_dirs):
     #testing the data structure
     num_files = len(found_dirs[dir_count])
     print('')
-    print('----------------' + str(found_dirs[dir_count][0]['fDir']) + '------------')
+
+    if first_pass == 0:
+        print('----------------' + str(path_selected) + '------------')
+    else:
+        print('----------------' + str(found_dirs[dir_count][0]['fDir']) + '------------')
     print('')
     for file_count in range(num_files):
 
