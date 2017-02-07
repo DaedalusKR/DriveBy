@@ -2,24 +2,24 @@ from Files import *
 
 path_selected = '/Users/kenroberts/Downloads'
 found_dirs = get_dir(path_selected)
-
-
 num_dirs = len(found_dirs)
-first_pass = 0
 
-for dir_count in range(num_dirs):
-    #testing the data structure
-    num_files = len(found_dirs[dir_count])
-    print('')
 
-    if first_pass == 0:
-        print('----------------' + str(path_selected) + '------------')
-    else:
+def run():
+    for dir_count in range(num_dirs):
+        #testing the data structure
+        num_files = len(found_dirs[dir_count])
+        print('')
         print('----------------' + str(found_dirs[dir_count][0]['fDir']) + '------------')
-    print('')
-    for file_count in range(num_files):
+        show_file_list(num_files, dir_count)
+        print('')
 
-        file_name = found_dirs[dir_count][file_count]['fName']
-        file_size = found_dirs[dir_count][file_count]['fSize']
-        print(file_name + " -- " + str(file_size))
 
+def show_file_list(num_files, dir_count):
+
+        for file_count in range(num_files):
+            file_name = found_dirs[dir_count][file_count]['fName']
+            file_size = found_dirs[dir_count][file_count]['fSize']
+            print(file_name + " -- " + str(file_size))
+
+run()
