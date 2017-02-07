@@ -11,6 +11,7 @@ def get_dir(path):
 
     drive = []
     directory_files = []
+    dir_counter = 0
 
     for i in found_dirs:
         dir = os.listdir(path+'/'+i)
@@ -18,13 +19,17 @@ def get_dir(path):
         for file in dir:
             if not file.startswith('.') and not file.startswith('~'):
                 # appends dir path to filename
-                file_size = get_file_stats(path + '/' + i + '/' + file)
+                if dir_counter == 0:
+                    file_size = get_file_stats(path+'/')
+                else:
+                    file_size = get_file_stats(path + '/' + i + '/' + file)
 
                 # build dict for file and add to list
                 file_data = {'fName': file, 'fSize': file_size, 'fDir': path + '/' + i}
                 directory_files.append(file_data)
                 directory_files_sorted_keys = sorted(directory_files, key=lambda k: k['fSize'], reverse = True)
                 directory_files = directory_files_sorted_keys
+
         drive.append(directory_files)
         directory_files = []
     return drive
