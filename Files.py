@@ -18,7 +18,7 @@ def get_dir(path):
         dir = os.listdir(path+'/'+i)
 
         for file in dir:
-            if not file.startswith('.') and not file.startswith('~'):
+            if not file.startswith('.') and not file.startswith('~') and not os.path.isdir(file):
                 # appends dir path to filename
                 print(file)
                 file_size = get_file_stats(path + '/' + i + '/' + file)
