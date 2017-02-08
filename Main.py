@@ -1,4 +1,8 @@
 from Files import *
+import sys
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+from UI import *
 
 path_selected = '/Users/kenroberts/Downloads'
 found_dirs = get_dir(path_selected)
@@ -14,12 +18,19 @@ def run():
         show_file_list(num_files, dir_count)
         print('')
 
-
 def show_file_list(num_files, dir_count):
 
-        for file_count in range(num_files):
-            file_name = found_dirs[dir_count][file_count]['fName']
-            file_size = found_dirs[dir_count][file_count]['fSize']
-            print(file_name + " -- " + str(file_size))
+    for file_count in range(num_files):
+        file_name = found_dirs[dir_count][file_count]['fName']
+        file_size = found_dirs[dir_count][file_count]['fSize']
+        print(file_name + " -- " + str(file_size))
 
-run()
+
+def main():
+    app = QApplication(sys.argv)
+    ui = main_view()
+    sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    app = main()
+    app.run()

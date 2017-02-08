@@ -10,7 +10,6 @@ def get_dir(path):
             found_dirs.append(dir)
 
     found_dirs.append('./')
-    print(found_dirs)
     drive = []
     directory_files = []
 
