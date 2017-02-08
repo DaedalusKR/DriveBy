@@ -9,18 +9,19 @@ def get_dir(path):
         for dir in dirs:
             found_dirs.append(dir)
 
+    found_dirs.append('./')
+    print(found_dirs)
     drive = []
     directory_files = []
 
     for i in found_dirs:
 
-        print('i = ', i)
         dir = os.listdir(path+'/'+i)
 
         for file in dir:
-            if not file.startswith('.') and not file.startswith('~') and not os.path.isdir(file):
+            print(file + 'is dir = ', os.path.isdir(file))
+            if not file.startswith('.') and not file.startswith('~') and not os.path.isdir(path + '/' + i + '/' + file):
                 # appends dir path to filename
-                print(file)
                 file_size = get_file_stats(path + '/' + i + '/' + file)
 
                 # build dict for file and add to list
