@@ -25,17 +25,19 @@ class main_view(QWidget):
             for file in range(len(data[dir])):
                 file_name_to_add = data[dir][file]['fName']
                 file_size_to_add = data[dir][file]['fSize']
-                file_data = [file_name_to_add, file_size_to_add]
+                file_dir_to_add = data[dir][file]['fDir']
+                file_data = [file_name_to_add, file_size_to_add, file_dir_to_add]
                 file_list.append(file_data)
 
         top_line = QTreeWidgetItem()
+        top_line.setText(0, str(file_list[0][2]))
+
+        file_names = []
         for i in range(len(file_list)):
-            top_line.setText(0, str(file_list[i][0]))
-            top_line.setText(1, str(file_list[i][1]))
+           file_names.append(file_list[i][0])
 
-
-
-
-
+        for i in range(3):
+            top_line_children = QTreeWidgetItem([file_names[i]])
+            top_line.addChild(top_line_children)
 
         self.tree_view.addTopLevelItem(top_line)
