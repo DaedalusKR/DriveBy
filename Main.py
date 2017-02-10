@@ -28,7 +28,7 @@ def show_file_list(num_files, dir_count):
 
 def main():
     app = QApplication(sys.argv)
-    ui = main_view()
+    ui = main_view(found_dirs)
     sys.exit(app.exec_())
 
 if __name__ == "__main__":
