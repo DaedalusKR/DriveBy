@@ -13,6 +13,8 @@ class main_view(QWidget):
         self.tree_view = QTreeWidget(self)
         self.tree_view.resize(600,600)
         self.tree_view.setColumnCount(2)
+        self.tree_view.setColumnWidth(0,400)
+        self.tree_view.setColumnWidth(1,200)
         tree_labels = ['Files', 'Size']
         self.tree_view.setHeaderLabels(tree_labels)
 
@@ -32,12 +34,16 @@ class main_view(QWidget):
         top_line = QTreeWidgetItem()
         top_line.setText(0, str(file_list[0][2]))
 
-        file_names = []
-        for i in range(len(file_list)):
-           file_names.append(file_list[i][0])
+        dir_size = 0
+        for file in range(len(file_list[0])):
+            dir_size += file_list[file][1]
 
-        for i in range(3):
-            top_line_children = QTreeWidgetItem([file_names[i]])
+        top_line.setText(1, str(dir_size))
+
+        for x in range(len(file_list[0])):
+            top_line_children = QTreeWidgetItem()
+            top_line_children.setText(0, str(file_list[x][0]))
+            top_line_children.setText(1, str(file_list[x][1]))
             top_line.addChild(top_line_children)
 
-        self.tree_view.addTopLevelItem(top_line)
+            self.tree_view.addTopLevelItem(top_line)
