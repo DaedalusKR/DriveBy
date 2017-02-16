@@ -4,10 +4,11 @@ import os
 # inspect directory, for each file: strip out temp files and get size
 def get_dir(path):
 
-    found_dirs = []
-    drive = []
-    directory_files = []
-    for (paths, dirs, files) in os.walk(path):
+    found_dirs = []  # holds paths
+    drive = []  # data structure for all levels of selected path
+    directory_files = []  # holds each file_data - used for setting keys and sorting
+
+    for (paths, dirs, files) in os.walk(path):  # loops x times where x = n paths. Add found paths to found_dirs list
         found_dirs.append(paths)
 
     for name in found_dirs:
