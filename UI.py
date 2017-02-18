@@ -15,8 +15,8 @@ class main_view(QWidget):
         # create the tree view, num of columns and size
         self.tree_view.resize(600,600)
         self.tree_view.setColumnCount(2)
-        self.tree_view.setColumnWidth(0,450)
-        self.tree_view.setColumnWidth(1,150)
+        self.tree_view.setColumnWidth(0, 450)
+        self.tree_view.setColumnWidth(1, 150)
 
     def plant_tree(self):
         # tree view titles take a list for multiple columns so build this and pass it
