@@ -20,13 +20,14 @@ def add_dirs_to_tree(path, tree_structure):
 
     for f in dir_list:
 
-        if os.path.isdir(os.path.join(path, f)) and not f == 'Library' and not f.startswith('.'):
+        if os.path.isdir(os.path.join(path, f)) and not f.startswith('.') and not f.startswith('~') and not os.path.islink(os.path.join(path, f)):
             tree_structure_dir = QTreeWidgetItem()
             tree_structure_dir.setText(0, f)
             y = os.listdir(os.path.join(path, f))
 
             for x in y:  # having to exclude Library because of alias files - need to think about how to do this
-                if not x == 'RunningChromeVersion' and  not x.startswith('Singleton')  and not x.startswith('.') and not x.startswith('~') and not os.path.isdir(os.path.join(path, f, x)):
+                print(os.path.join(path, x))
+                if not x.startswith('.') and not x.startswith('~') and not os.path.isdir(os.path.join(path, f, x)) and not os.path.islink(os.path.join(path, f, x)):
                     # appends dir path to filename
                     file_size = get_file_stats(os.path.join(path, f, x))
 
@@ -37,7 +38,7 @@ def add_dirs_to_tree(path, tree_structure):
                     tree_structure_children.setText(1, str(file_data['fSize']))
                     tree_structure_dir.addChild(tree_structure_children)
 
-                tree_structure.addChild(tree_structure_dir)
+                    tree_structure.addChild(tree_structure_dir)
             add_dirs_to_tree(os.path.join(path, f), tree_structure_dir)
 
     return
