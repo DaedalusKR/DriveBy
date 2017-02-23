@@ -7,7 +7,7 @@ def get_dir(path):
     tree_structure = QTreeWidgetItem()  # top tree struct init as selected path
 
     top_path_size = 0
-    t_size = add_dirs_to_tree(path, tree_structure, top_path_size)
+    t_size = add_dirs_to_tree(path, tree_structure, top_path_size) + get_top_dir_size(path)
     tree_structure.setText(0, path)
     tree_structure.setText(1, str(t_size))
     return tree_structure
@@ -41,7 +41,7 @@ def add_dirs_to_tree(path, tree_structure, top_path_size):
             tree_structure_dir.setText(0, top_dir_file)
             tree_structure_dir.setText(1, str(get_file_stats(os.path.join(path, top_dir_file))))
             tree_structure.addChild(tree_structure_dir)
-            top_path_size += get_file_stats(os.path.join(path, top_dir_file))
+            #top_path_size += get_file_stats(os.path.join(path, top_dir_file))
 
         dir_size = 0
         if os.path.isdir(os.path.join(path, top_dir_file)) and not top_dir_file.startswith('.') and not top_dir_file.startswith('~') and not os.path.islink(os.path.join(path, top_dir_file)):
@@ -57,6 +57,5 @@ def add_dirs_to_tree(path, tree_structure, top_path_size):
 
             tree_structure_dir.setText(1, str(dir_size))
             add_dirs_to_tree(os.path.join(path, top_dir_file), tree_structure_dir, top_path_size)
-            print(top_path_size)
     return top_path_size
 
