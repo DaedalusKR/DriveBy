@@ -5,7 +5,7 @@ from PyQt5.QtGui import *
 from UI import *
 
 
-path_selected = '/Users/kenroberts'
+path_selected = '/Users/kenroberts/Downloads'
 
 
 
