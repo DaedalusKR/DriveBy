@@ -37,7 +37,11 @@ def add_dirs_to_tree(path, tree_structure, top_path_size):
         tree_structure_dir = QTreeWidgetItem()
 
         # file for top dir
-        if not os.path.isdir(top_dir_file) and not top_dir_file.startswith('.') and not top_dir_file.startswith('~') and not os.path.islink(top_dir_file):
+        if not os.path.isdir(top_dir_file) and not top_dir_file.startswith('.') and not top_dir_file.startswith('~') and not os.path.islink(os.path.join(path, top_dir_file)):
+
+            # working in here - .isfile was killing subdirs.....
+
+            print(os.path.join(path, top_dir_file))
             tree_structure_dir.setText(0, top_dir_file)
             tree_structure_dir.setText(1, str(get_file_stats(os.path.join(path, top_dir_file))))
             tree_structure.addChild(tree_structure_dir)
@@ -54,6 +58,7 @@ def add_dirs_to_tree(path, tree_structure, top_path_size):
                     file_size = get_file_stats(os.path.join(path, top_dir_file, file))
                     dir_size += file_size
                     top_path_size += file_size
+                    print(os.path.join(path, file))
 
             tree_structure_dir.setText(1, str(dir_size))
             add_dirs_to_tree(os.path.join(path, top_dir_file), tree_structure_dir, top_path_size)
