@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import *
 
 B_to_GB = 1073741824
 B_to_MB = 1048576
+B_to_KB = 10254
 
 # inspect directory, for each file: strip out temp files, add to treewidgetitem and get size
 def get_dir(path):
@@ -21,7 +22,28 @@ def get_dir(path):
 
 def get_file_stats(file):  # return size of parsed file
     size = os.path.getsize(file)
-    return size
+
+    if size >= B_to_GB:
+        size = size/B_to_GB
+    elif size >= B_to_MB:
+        size = size/B_to_MB
+    elif size > 0:
+        size = round(size/B_to_KB*10)
+        return size
+
+    return round(size, 2)
+
+def file_measure(file):
+    size = os.path.getsize(file)
+    measure = ''
+    if size >= B_to_GB:
+        measure = ' GB'
+    elif size >= B_to_MB:
+        measure = ' MB'
+    elif size > 0:
+        measure = ' KB'
+
+    return measure
 
 
 def get_top_dir_size(path):  # return suze of top directory parsed
@@ -49,7 +71,7 @@ def add_dirs_to_tree(path, tree_structure, top_path_size):  # go through each di
             print(os.path.join(path, top_dir_file))  # show file being parsed in the log
 
             tree_structure_dir.setText(0, top_dir_file)
-            tree_structure_dir.setText(1, str(get_file_stats(os.path.join(path, top_dir_file))))
+            tree_structure_dir.setText(1, str(get_file_stats(os.path.join(path, top_dir_file))) + file_measure(os.path.join(path, top_dir_file)))
             tree_structure.addChild(tree_structure_dir)
 
         # when find a directory add its contents to the tree
@@ -79,7 +101,7 @@ def add_dirs_to_tree(path, tree_structure, top_path_size):  # go through each di
 
 def get_size_to_show(dir_size):
     if dir_size >= B_to_GB:
-        dir_size = dir_size/B_to_GB
+        dir_size = str(dir_size/B_to_GB) + ' Gb'
     else:
-        dir_size = dir_size/B_to_MB
-    return round(dir_size, 2)
+        dir_size = str(dir_size/B_to_MB) + ' Mb'
+    return dir_size
