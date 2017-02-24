@@ -13,7 +13,7 @@ class main_view(QWidget):
 
     def setup_ui(self):
         # create the tree view, num of columns and size
-        self.tree_view.resize(600,600)
+        self.tree_view.resize(600,800)
         self.tree_view.setColumnCount(2)
         self.tree_view.setColumnWidth(0, 450)
         self.tree_view.setColumnWidth(1, 150)
