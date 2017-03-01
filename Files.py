@@ -56,9 +56,7 @@ def add_dirs_to_tree(path, tree_structure, top_path_size):  # go through each di
                         and not os.path.islink(os.path.join(path, top_dir_file, file)):
 
                     file_size = get_file_stats(os.path.join(path, top_dir_file, file))
-                    print('dir size before: ', dir_size)
                     dir_size += file_size
-                    print('dir size after: ', dir_size)
                     top_path_size += file_size
                     print(os.path.join(path, file))  # show file being parsed in the log
                 tree_structure_dir.setText(1, str(convert_from_bytes(dir_size)) + dir_measure(dir_size))  # str(dir_size)) # + dir_measure(dir_size))
@@ -72,7 +70,7 @@ def get_file_stats(file):  # return size of parsed file
     return size
 
 
-def get_top_dir_size(path):  # return suze of top directory parsed
+def get_top_dir_size(path):  # return size of top directory parsed
     top_dir_contents = os.listdir(path)
     t_dir_size = 0
     for file in top_dir_contents:
