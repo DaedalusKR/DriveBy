@@ -4,9 +4,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from UI import *
 
-
-path_selected = '/Applications/Calculator.app'  # dir sizes not showing -- / = MacHD
-
+path_selected = "/Users/kenroberts/Downloads"
+# path_selected = '/Applications/Calculator.app'  # dir sizes not showing -- / = MacHD
 
 
 def main():
