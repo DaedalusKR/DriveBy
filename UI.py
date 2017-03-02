@@ -71,5 +71,5 @@ class drive_select_view(QWidget):
         self.window.show()
 
     def ok_clicked(self):
-        print(self.drive_list.currentRow())
+        print('to pass: ' + '/Volume/' + self.drive_list.currentItem().text())
 
