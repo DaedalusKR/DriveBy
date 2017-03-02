@@ -9,18 +9,16 @@ B_to_KB = 10254
 
 # inspect directory, for each file: strip out temp files, add to treewidgetitem and get size
 def get_dir(path):
+
     tree_structure = QTreeWidgetItem()  # top tree struct init as selected path - when complete return to caller
     top_path_size = 0  # top directory size tracker
 
     #  return the size of the top directory being parsed and add its contents to a child tree widget
-    t2_size = get_dir_size(path)
-
     add_dirs_to_tree(path, tree_structure, top_path_size) #+ get_top_dir_size(path)
     tree_structure.setText(0, path)
-    tree_structure.setText(1, str(convert_from_bytes(t2_size)) + dir_measure(t2_size))# str(convert_from_bytes(t_size)) + dir_measure(t_size))
+    tree_structure.setText(1, str(convert_from_bytes(get_dir_size(path))) + dir_measure(get_dir_size(path)))# str(convert_from_bytes(t_size)) + dir_measure(t_size))
 
     return tree_structure
-
 
 def add_dirs_to_tree(path, tree_structure, top_path_size):  # go through each directory and add treewidget for each dir and file
 
@@ -110,6 +108,7 @@ def get_dir_size(path):
     size_of_dir = 0
     for dirpath, dirnames, filenames in os.walk(path):
         for f in filenames:
-            fp = os.path.join(dirpath, f)
-            size_of_dir += os.path.getsize(fp)
+            if not os.path.islink(os.path.join(dirpath, f)):
+                fp = os.path.join(dirpath, f)
+                size_of_dir += os.path.getsize(fp)
     return size_of_dir
