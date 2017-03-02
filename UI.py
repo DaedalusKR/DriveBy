@@ -44,20 +44,32 @@ class drive_select_view(QWidget):
         self.drive_list.setAlternatingRowColors(True)
         self.drive_list.setIconSize(QSize(50, 50))
         self.ok_button = QPushButton('OK', self)
+        self.ok_button.clicked.connect(self.ok_clicked)
         self.cancel_button = QPushButton('Close', self)
+        self.inst_label = QLabel('Select Drive or Directory to Scan:')
 
+        self.vbox.addWidget(self.inst_label)
         self.vbox.addWidget(self.drive_list)
         self.hbox.addWidget(self.ok_button)
         self.hbox.addWidget(self.cancel_button)
         self.vbox.addLayout(self.hbox)
 
         mount_list = os.listdir('/Volumes')
+        print(mount_list)
         for item in mount_list:
             item_widget = QListWidgetItem()
             item_widget.setText(item)
             item_widget.setIcon(QIcon('hdd.ico'))
             self.drive_list.addItem(item_widget)
+        folder_widget = QListWidgetItem()
+        folder_widget.setText('Select a Directory')
+        folder_widget.setIcon(QIcon('folder.ico'))
+        self.drive_list.addItem(folder_widget)
 
 
         self.window.setLayout(self.vbox)
         self.window.show()
+
+    def ok_clicked(self):
+        print(self.drive_list.currentRow())
+
