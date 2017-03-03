@@ -34,7 +34,7 @@ def add_dirs_to_tree(path, tree_structure, top_path_size):  # go through each di
                 and not top_dir_file.startswith('~') \
                 and not os.path.islink(os.path.join(path, top_dir_file)):
 
-            # print(os.path.join(path, top_dir_file))  # show file being parsed in the log
+            print(os.path.join(path, top_dir_file))  # show file being parsed in the log
             tree_structure_dir.setText(0, top_dir_file)
             tree_structure_dir.setText(1, str(convert_from_bytes(os.path.getsize(os.path.join(path, top_dir_file)))) + file_measure(os.path.join(path, top_dir_file)))
             tree_structure.addChild(tree_structure_dir)
@@ -54,7 +54,7 @@ def add_dirs_to_tree(path, tree_structure, top_path_size):  # go through each di
 
                     file_size = os.path.getsize(os.path.join(path, top_dir_file, file))
                     top_path_size += file_size
-                    # print(os.path.join(path, file))  # show file being parsed in the log
+                    print(os.path.join(path, file))  # show file being parsed in the log
                     tree_structure_dir.setText(1, str(convert_from_bytes(get_dir_size(os.path.join(path, top_dir_file)))) + dir_measure(get_dir_size(os.path.join(path, top_dir_file))))
             add_dirs_to_tree(os.path.join(path, top_dir_file), tree_structure_dir, top_path_size)
     return

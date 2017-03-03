@@ -22,5 +22,5 @@ if __name__ == "__main__":
     app = main()
     app.run()
 
-path_selected = "/Users/kenroberts/Downloads"
-progress_count = get_scan_count(path_selected)
+# path_selected = "/Users/kenroberts/Downloads"
+# progress_count = get_scan_count(path_selected)

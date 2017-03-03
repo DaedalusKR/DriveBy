@@ -7,11 +7,18 @@ from PyQt5.QtCore import *
 class main_view(QWidget):
     def __init__(self, path_selected):
         super().__init__()
+
+        self.drive_view = QWidget()
+        self.vbox = QVBoxLayout()
         self.tree_view = QTreeWidget(self)
+
+        self.vbox.addWidget(self.tree_view)
         self.path_to_scan = path_selected
         self.setup_ui()
         self.plant_tree()
+        self.setLayout(self.vbox)
         self.show()
+        # falling out of scope, look at battle for idea round this
 
     def setup_ui(self):
         # create the tree view, num of columns and size
@@ -71,5 +78,7 @@ class drive_select_view(QWidget):
         self.window.show()
 
     def ok_clicked(self):
-        print('to pass: ' + '/Volume/' + self.drive_list.currentItem().text())
+        path_selected = '/Volumes/' + self.drive_list.currentItem().text() + '/Users/kenroberts/Downloads'
+        self.window.close()
+        self.file_scan = main_view(path_selected)
 
