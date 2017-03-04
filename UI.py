@@ -16,13 +16,16 @@ class main_view(QWidget):
         self.path_to_scan = path_selected
         self.setup_ui()
         self.plant_tree()
+        self.tree_view.sortByColumn(1, Qt.AscendingOrder)
+
         self.setLayout(self.vbox)
+        self.resize(600, 600)
         self.show()
         # falling out of scope, look at battle for idea round this
 
     def setup_ui(self):
         # create the tree view, num of columns and size
-        self.tree_view.resize(600,800)
+        #self.tree_view.resize(600,800)
         self.tree_view.setColumnCount(2)
         self.tree_view.setColumnWidth(0, 450)
         self.tree_view.setColumnWidth(1, 150)
@@ -41,6 +44,7 @@ class drive_select_view(QWidget):
     def __init__(self):
         super().__init__()
         self.window = QWidget()
+        self.file_scan_view = None
         self.window.resize(400, 250)
 
         self.vbox = QVBoxLayout()
@@ -73,12 +77,11 @@ class drive_select_view(QWidget):
         folder_widget.setIcon(QIcon('folder.ico'))
         self.drive_list.addItem(folder_widget)
 
-
         self.window.setLayout(self.vbox)
         self.window.show()
 
     def ok_clicked(self):
         path_selected = '/Volumes/' + self.drive_list.currentItem().text() + '/Users/kenroberts/Downloads'
         self.window.close()
-        self.file_scan = main_view(path_selected)
+        self.file_scan_view = main_view(path_selected)
 
